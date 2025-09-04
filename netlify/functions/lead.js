@@ -1,7 +1,7 @@
 // netlify/functions/lead.js
 
 
-const PIXEL_ID = process.env.PIXEL_ID;
+const PIXEL_ID = process.env.PIXEL_ID || process.env.FB_PIXEL_ID;
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 
 
@@ -41,7 +41,9 @@ exports.handler = async (event) => {
       ...(body.test_event_code ? { test_event_code: body.test_event_code } : {})
     };
 
-    const url = `https://graph.facebook.com/v18.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`;
+    const pixelPath = PIXEL_ID ? `/${PIXEL_ID}` : '';
+const url = `https://graph.facebook.com/v19.0${pixelPath}/events?access_token=${ACCESS_TOKEN}`;
+
 
     const resp = await fetch(url, {
       method: "POST",
