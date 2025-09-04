@@ -75,38 +75,62 @@
 
   <!-- Jednorazowy LEAD przez CAPI po wejściu na stronę -->
   <script>
-    (function () {
-      if (sessionStorage.getItem('lead_sent')) return;
-      sessionStorage.setItem('lead_sent', '1');
+  document.addEventListener('DOMContentLoaded', function () {
+    // jeśli w tej karcie już wysłano - nie duplikuj
+    if (sessionStorage.getItem('lead_sent')) {
+      console.log('[CAPI] lead już wysłany w tej karcie');
+      return;
+    }
 
-      // BEZBŁĘDNE wyrażenie regularne (naprawa "Unterminated group")
-      function getCookie(name) {
-        const safe = name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1');
-        const m = document.cookie.match(new RegExp('(?:^|; )' + safe + '=([^;]*)'));
-        return m ? decodeURIComponent(m[1]) : '';
+    function getCookie(name) {
+      // bezpieczne escapowanie nazw (fix na "Unterminated group")
+      const safe = name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1');
+      const m = document.cookie.match(new RegExp('(?:^|; )' + safe + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : '';
+    }
+    function getParam(name){ return new URLSearchParams(location.search).get(name); }
+
+    const fbp    = getCookie('_fbp') || localStorage.getItem('_fbp') || '';
+    const fbclid = getParam('fbclid');
+    const fbc    = fbclid ? `fb.1.${Math.floor(Date.now()/1000)}.${fbclid}` : '';
+
+    const payload = {
+      event_name: 'Lead',
+      event_time: Math.floor(Date.now()/1000),
+      event_id: 'form_submit_' + Date.now(),
+      action_source: 'website',
+      event_source_url: window.location.href,
+      fbp, fbc,
+      user_data: { client_user_agent: navigator.userAgent }
+    };
+
+    console.log('[CAPI] wysyłam Lead…', payload);
+
+    // próba 1: fetch
+    fetch('/.netlify/functions/meta-capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(async (r) => {
+      const t = await r.text().catch(()=> '');
+      console.log('[CAPI] odpowiedź funkcji:', r.status, t);
+      if (r.ok) sessionStorage.setItem('lead_sent', '1');
+      else throw new Error('HTTP ' + r.status);
+    })
+    .catch((e) => {
+      console.warn('[CAPI] fetch nieudany, próba sendBeacon', e);
+      try {
+        const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+        const ok = navigator.sendBeacon('/.netlify/functions/meta-capi', blob);
+        console.log('[CAPI] sendBeacon status:', ok);
+        if (ok) sessionStorage.setItem('lead_sent', '1');
+      } catch (e2) {
+        console.error('[CAPI] sendBeacon też nieudany', e2);
       }
-      function getParam(name){ return new URLSearchParams(location.search).get(name); }
+    });
+  });
+</script>
 
-      const fbp = getCookie('_fbp') || localStorage.getItem('_fbp') || '';
-      const fbclid = getParam('fbclid');
-      const fbc = fbclid ? `fb.1.${Math.floor(Date.now()/1000)}.${fbclid}` : '';
-
-      const payload = {
-        event_name: 'Lead',
-        event_time: Math.floor(Date.now()/1000),
-        event_id: 'form_submit_' + Date.now(),
-        action_source: 'website',
-        event_source_url: window.location.href,
-        fbp, fbc,
-        user_data: { client_user_agent: navigator.userAgent }
-      };
-
-      fetch('/.netlify/functions/meta-capi', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      }).then(r => r.text()).catch(()=>{});
-    })();
-  </script>
 </body>
 </html>
