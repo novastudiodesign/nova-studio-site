@@ -31,7 +31,6 @@
       position:relative;
       overflow-x:hidden;
     }
-    /* delikatna siatka linii */
     .grid{
       position:absolute; inset:0;
       background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
@@ -118,5 +117,42 @@
       <footer class="muted">Twoja Marka. Nasza Strategia.</footer>
     </div>
   </div>
+
+    <!-- AUTO-Lead via CAPI po wejściu na stronę podziękowania -->
+  <script>
+    (function () {
+      if (sessionStorage.getItem('lead_sent')) return;
+
+      function getCookie(name) {
+        const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([$?*|{}\(\)\[\]\\\/\+^])/g,'\\$1') + '=([^;]*)'));
+        return m ? decodeURIComponent(m[1]) : null;
+      }
+      function getParam(name) {
+        return new URLSearchParams(location.search).get(name);
+      }
+
+      const fbp = getCookie('_fbp') || localStorage.getItem('_fbp') || '';
+      const fbclid = getParam('fbclid');
+      const fbc = fbclid ? `fb.1.${Date.now()}.${fbclid}` : '';
+
+      const payload = {
+        event_name: "Lead",
+        event_time: Math.floor(Date.now() / 1000),
+        event_id: "form_submit_" + Date.now(),
+        event_source_url: window.location.href,
+        action_source: "website",
+        fbp: fbp,
+        fbc: fbc
+      };
+
+      fetch("/.netlify/functions/meta-capi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).then(r => r.json()).then(console.log);
+
+      sessionStorage.setItem('lead_sent', '1');
+    })();
+  </script>
 </body>
 </html>
