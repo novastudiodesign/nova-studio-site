@@ -1,0 +1,271 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA STUDIO — Agencja Marketingowa</title>
+    <link rel="stylesheet" href="css/style.css">
+<style>
+/* NOVA STUDIO — Formularz: Opcja 1 (Minimalizm & elegancja) */
+:root {
+  --ns-bg: #FFFFFF;
+  --ns-border: #E5E7EB;
+  --ns-input-bg: #F9FAFB;
+  --ns-text: #111827;
+  --ns-muted: #6B7280;
+  --ns-primary: #1D4ED8;
+  --ns-primary-hover: #3B82F6;
+  --ns-shadow: 0 10px 30px rgba(17, 24, 39, 0.06);
+}
+
+form.ns-clean-form {
+  background: var(--ns-bg);
+  border: 1px solid var(--ns-border);
+  border-radius: 14px;
+  padding: clamp(16px, 2.8vw, 28px);
+  box-shadow: var(--ns-shadow);
+}
+
+.ns-clean-form .ns-form-title,
+.ns-clean-form h2,
+.ns-clean-form h3,
+.ns-clean-form label {
+  color: var(--ns-text) !important;
+}
+
+.ns-clean-form .ns-form-note {
+  color: var(--ns-muted);
+  font-size: .9rem;
+}
+
+/* Pola */
+.ns-clean-form input[type="text"],
+.ns-clean-form input[type="email"],
+.ns-clean-form input[type="tel"],
+.ns-clean-form select,
+.ns-clean-form textarea {
+  width: 100%;
+  background: var(--ns-input-bg);
+  border: 1px solid var(--ns-border);
+  color: var(--ns-text);
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  transition: box-shadow .2s ease, border-color .2s ease, background .2s ease;
+}
+
+.ns-clean-form textarea { min-height: 140px; resize: vertical; }
+
+.ns-clean-form input:focus,
+.ns-clean-form select:focus,
+.ns-clean-form textarea:focus {
+  border-color: var(--ns-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ns-primary) 18%, transparent);
+  background: #fff;
+}
+
+/* Checkboxy */
+.ns-clean-form input[type="checkbox"] {
+  accent-color: var(--ns-primary);
+}
+
+/* Przyciski */
+.ns-clean-form button,
+.ns-clean-form input[type="submit"],
+.ns-clean-form .btn-primary {
+  background: var(--ns-primary) !important;
+  color: #fff !important;
+  border: 1px solid var(--ns-primary);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s ease, transform .02s ease;
+}
+
+.ns-clean-form button:hover,
+.ns-clean-form input[type="submit"]:hover,
+.ns-clean-form .btn-primary:hover {
+  background: var(--ns-primary-hover) !important;
+}
+
+.ns-clean-form button:active,
+.ns-clean-form input[type="submit"]:active,
+.ns-clean-form .btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* Link mail/tel pod formularzem */
+.ns-clean-form a {
+  color: var(--ns-primary);
+  text-decoration: none;
+}
+.ns-clean-form a:hover { text-decoration: underline; }
+
+/* Siatka odstępów */
+.ns-clean-form .field { margin-bottom: 14px; }
+</style>
+</head>
+<body>
+    <header>
+        <img src="assets/logo.png" alt="Nova Studio Logo">
+        <nav>
+            <a href="#oferta">Oferta</a>
+            <a href="#dlakogo">Dla kogo</a>
+            <a href="#kontakt">Kontakt</a>
+        </nav>
+    </header>
+    <section class="hero">
+        <h1>Twoja marka. Nasza strategia.</h1>
+        <p>Kreujemy wizerunek, który sprzedaje. Projektujemy logo, prowadzimy social media, tworzymy landing page i rozwijamy firmy dzięki skutecznemu marketingowi.</p>
+    </section>
+<section style="background-color: #fff; padding: 60px 20px;">
+    <h2 style="text-align: center; font-size: 32px; margin-bottom: 40px;">Co możemy dla Ciebie zrobić?</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; max-width: 1000px; margin: auto;">
+        <div style="background-color: #f0f0f0; padding: 30px; border-radius: 16px;">
+            <h3 style="margin-top: 0;">Logo i branding</h3>
+            <p>Tworzymy unikalne logo i pełną identyfikację wizualną, która wyróżnia Twoją markę.</p>
+        </div>
+        <div style="background-color: #f0f0f0; padding: 30px; border-radius: 16px;">
+            <h3 style="margin-top: 0;">Social Media</h3>
+            <p>Profesjonalne prowadzenie profili i tworzenie angażującego contentu.</p>
+        </div>
+        <div style="background-color: #f0f0f0; padding: 30px; border-radius: 16px;">
+            <h3 style="margin-top: 0;">Strony i landing page</h3>
+            <p>Projektujemy i wdrażamy nowoczesne, konwertujące strony internetowe.</p>
+        </div>
+        <div style="background-color: #f0f0f0; padding: 30px; border-radius: 16px;">
+            <h3 style="margin-top: 0;">SEO & Ads</h3>
+            <p>Pozycjonowanie, kampanie Google i Meta Ads — dotrzyj do klientów.</p>
+        </div>
+    </div>
+</section>
+
+    <section id="oferta">
+        <h2>Kompleksowa Oferta</h2>
+        <p>✔ Profesjonalne logo i identyfikacja wizualna<br>
+        ✔ Prowadzenie social mediów i tworzenie contentu<br>
+        ✔ Projektowanie nowoczesnych stron i landing page’y<br>
+        ✔ SEO, pozycjonowanie, copywriting<br>
+        ✔ Reklamy Google Ads / Meta Ads<br>
+        ✔ Kompleksowa strategia marketingowa</p>
+    </section>
+    <section id="dlakogo">
+        <h2>Dla kogo?</h2>
+        <p>Dla nowych firm, które startują z rozmachem. Dla tych, którzy chcą zbudować silną markę od zera. Dla przedsiębiorców, którzy chcą wejść na wyższy poziom — wyglądać profesjonalnie, działać efektywnie i przyciągać klientów.</p>
+    </section>
+<section style="background-color: #fdfdfd; padding: 60px 20px;">
+    <h2 style="text-align: center; font-size: 32px; margin-bottom: 40px;">Dlaczego warto z nami?</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 1000px; margin: auto; text-align: center;">
+        <div>
+            <img src="https://img.icons8.com/ios-filled/50/000000/checked--v1.png" alt="ikona" style="height:40px; margin-bottom:10px;">
+            <h3>Doświadczenie</h3>
+            <p>Lata pracy z firmami z różnych branż.</p>
+        </div>
+        <div>
+            <img src="https://img.icons8.com/ios-filled/50/000000/light-on--v1.png" alt="ikona" style="height:40px; margin-bottom:10px;">
+            <h3>Kreatywność</h3>
+            <p>Tworzymy rozwiązania, które się wyróżniają.</p>
+        </div>
+        <div>
+            <img src="https://img.icons8.com/ios-filled/50/000000/rocket--v1.png" alt="ikona" style="height:40px; margin-bottom:10px;">
+            <h3>Efekty</h3>
+            <p>Nasze działania przekładają się na realne wyniki.</p>
+        </div>
+    </div>
+</section>
+
+    
+<section id="kontakt" style="background-color: #ffffff; padding: 80px 20px; text-align: center;">
+    <h2>Skontaktuj się z nami</h2>
+    <div style="margin-top: 30px;">
+        <a href="tel:+48732777326" style="display: inline-block; padding: 12px 24px; margin: 10px; background-color: #3f51b5; color: white; border-radius: 8px; text-decoration: none;">📞 732 777 326</a>
+        <a href="mailto:novastudio.kontakt@gmail.com" style="display: inline-block; padding: 12px 24px; margin: 10px; background-color: #ff4081; color: white; border-radius: 8px; text-decoration: none;">📧 novastudio.kontakt@gmail.com</a>
+    </div>
+</section>
+
+        <h2>Skontaktuj się z nami</h2>
+        <p>📞 <a href="tel:+48732777326">732 777 326</a><br>
+        📧 <a href="mailto:novastudio.kontakt@gmail.com">novastudio.kontakt@gmail.com</a></p>
+    </section>
+    <footer>
+        &copy; 2025 NOVA STUDIO – Tworzymy marki, które robią wrażenie.
+    </footer>
+<section id="consultation" style="padding:48px 0; background:#0b0b11; color:#fff;">
+  <div style="max-width: 1000px; margin:0 auto; padding:0 20px; display:flex; flex-wrap:wrap; align-items:center; gap:24px;">
+    <div style="flex:1 1 380px;">
+      <h2 style="font-size:32px; line-height:1.2; margin:0 0 14px; font-weight:800;">Umów bezpłatną konsultację</h2>
+      <p style="font-size:18px; opacity:.88; margin:0 0 18px;">
+        Nie wciskamy pakietów. Słuchamy, doradzamy i wyceniamy pod Twój cel oraz budżet.
+        15–20 min rozmowy i masz plan na dalsze kroki.
+      </p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;">
+        <a href="#contact-form" style="background:#1a1a24; color:#fff; padding:12px 16px; border-radius:8px; text-decoration:none; font-weight:700; border:1px solid #2a2a3c;">Zarezerwuj konsultację</a>
+        <a href="mailto:novastudio.kontakt@gmail.com" style="border:1px solid #2a2a3c; color:#fff; padding:12px 16px; border-radius:8px; text-decoration:none; font-weight:700;">Napisz do nas</a>
+      </div>
+      <p style="font-size:13px; opacity:.7; margin-top:10px;">Odzew w ciągu 24h.</p>
+    </div>
+    <div style="flex:1 1 380px; background:#121222; border:1px solid #22223a; border-radius:12px; padding:18px;">
+      <ul style="margin:0; padding:0 0 0 18px; line-height:1.8;">
+        <li>Logo i identyfikacja</li>
+        <li>Strony i landing page</li>
+        <li>Social media & content</li>
+        <li>Google Ads / Meta Ads</li>
+        <li>Projekt wizytówek i ulotek</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section id="contact-form" style="padding:48px 0; background:#0b0b11; color:#fff;">
+  <div style="max-width: 1000px; margin:0 auto; padding:0 20px;">
+    <h3 style="font-size:26px; margin:0 0 18px; font-weight:800;">Krótki formularz — oddzwonimy</h3>
+    <form class="ns-clean-form" name="Kontakt" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/?sent=true" style="display:grid; grid-template-columns:1fr 1fr; gap:12px; background:#121222; border:1px solid #22223a; padding:16px; border-radius:12px;">
+      <input type="hidden" name="form-name" value="Kontakt">
+      <p style="display:none;">
+        <label>Nie wypełniaj: <input name="bot-field" /></label>
+      </p>
+      <label style="display:flex; flex-direction:column; gap:6px;">Imię i nazwisko
+        <input type="text" name="name" required style="padding:12px; border-radius:8px; border:1px solid #2c2c41; background:#0f0f18; color:#fff;">
+      </label>
+      <label style="display:flex; flex-direction:column; gap:6px;">E‑mail
+        <input type="email" name="email" required style="padding:12px; border-radius:8px; border:1px solid #2c2c41; background:#0f0f18; color:#fff;">
+      </label>
+      <label style="display:flex; flex-direction:column; gap:6px;">Telefon (opcjonalnie)
+        <input type="tel" name="phone" style="padding:12px; border-radius:8px; border:1px solid #2c2c41; background:#0f0f18; color:#fff;">
+      </label>
+      <label style="display:flex; flex-direction:column; gap:6px;">Budżet (opcjonalnie)
+        <select name="budget" style="padding:12px; border-radius:8px; border:1px solid #2c2c41; background:#0f0f18; color:#fff;">
+          <option value="">Wybierz...</option>
+          <option>do 1 000 zł</option>
+          <option>1 000 – 3 000 zł</option>
+          <option>3 000 – 7 000 zł</option>
+          <option>7 000+ zł</option>
+        </select>
+      </label>
+      <label style="grid-column:1 / -1; display:flex; flex-direction:column; gap:6px;">Opisz krótko swój projekt
+        <textarea name="message" rows="5" required style="padding:12px; border-radius:8px; border:1px solid #2c2c41; background:#0f0f18; color:#fff;"></textarea>
+      </label>
+      <label style="grid-column:1 / -1; display:flex; align-items:center; gap:10px; font-size:14px; opacity:.85;">
+        <input type="checkbox" name="rodo" required>
+        Wyrażam zgodę na kontakt w sprawie wyceny.
+      </label>
+      <div style="grid-column:1 / -1; display:flex; gap:10px; align-items:center;">
+        <button type="submit" style="background:#6D28D9; color:#fff; padding:12px 18px; border-radius:8px; border:none; font-weight:700; cursor:pointer;">Wyślij zgłoszenie</button>
+        <a href="mailto:novastudio.kontakt@gmail.com" style="text-decoration:none; font-weight:600; color:#fff;">lub napisz: novastudio.kontakt@gmail.com</a>
+      </div>
+      <p id="thanks" style="grid-column:1 / -1; display:none; margin:8px 0 0; font-size:14px; opacity:.88;">Dziękujemy! Wrócimy z odpowiedzią w ciągu 24h.</p>
+    </form>
+  </div>
+  <script>
+    (function(){
+      var params=new URLSearchParams(window.location.search);
+      if(params.get('sent')==='true'){
+        var el=document.getElementById('thanks');
+        if(el) el.style.display='block';
+      }
+    })();
+  </script>
+</section>
+</body>
+</html>
