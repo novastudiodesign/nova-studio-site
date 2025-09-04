@@ -1,4 +1,5 @@
-// netlify/functions/meta-capi.js
+// netlify/functions/lead.js
+
 
 const PIXEL_ID = process.env.FB_PIXEL_ID;
 const ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN;
