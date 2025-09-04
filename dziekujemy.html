@@ -2,97 +2,48 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dziękujemy – Nova Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg1:#0d0f14;
-      --bg2:#0b0c10;
-      --txt:#eaeaea;
-      --muted:#b8b8b8;
-      --accent1:#ff3b3b;  /* red */
-      --accent2:#ff2da8;  /* magenta */
-      --accent3:#2457ff;  /* blue */
-      --accent4:#ffd000;  /* yellow */
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    :root{--bg1:#0d0f14;--bg2:#0b0c10;--txt:#eaeaea;--muted:#b8b8b8;--accent2:#ff2da8;--accent3:#2457ff;--accent4:#ffd000}
+    *{box-sizing:border-box} html,body{height:100%}
     body{
-      margin:0;
-      font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--txt);
+      margin:0; font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; color:var(--txt);
       background:
-        radial-gradient(1200px 800px at 10% -10%, rgba(36,87,255,0.15), transparent 60%),
-        radial-gradient(1000px 700px at 110% 10%, rgba(255,45,168,0.12), transparent 60%),
+        radial-gradient(1200px 800px at 10% -10%, rgba(36,87,255,.15), transparent 60%),
+        radial-gradient(1000px 700px at 110% 10%, rgba(255,45,168,.12), transparent 60%),
         linear-gradient(180deg,var(--bg1),var(--bg2));
-      position:relative;
-      overflow-x:hidden;
+      overflow-x:hidden; position:relative;
     }
-    .grid{
-      position:absolute; inset:0;
-      background-image: linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
-                        linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-      background-size: 32px 32px, 32px 32px;
+    .grid{position:absolute; inset:0; pointer-events:none;
+      background-image: linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+      background-size:32px 32px, 32px 32px;
       mask-image: radial-gradient(ellipse at center, rgba(0,0,0,.7), rgba(0,0,0,0.1) 60%, transparent 75%);
-      pointer-events:none;
     }
-    .wrap{
-      min-height:100%;
-      display:flex; align-items:center; justify-content:center;
-      padding:64px 20px;
-    }
-    .card{
-      width:min(720px, 92vw);
-      background:rgba(255,255,255,0.02);
-      border:1px solid rgba(255,255,255,0.08);
-      border-radius:24px;
-      padding:32px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      animation: pop .5s ease-out;
-    }
+    .wrap{min-height:100%; display:flex; align-items:center; justify-content:center; padding:64px 20px}
+    .card{width:min(720px,92vw); background:rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.08);
+      border-radius:24px; padding:32px; backdrop-filter:blur(6px); box-shadow:0 10px 30px rgba(0,0,0,.35); animation:pop .5s ease-out}
     @keyframes pop{from{transform:translateY(8px);opacity:0}to{transform:none;opacity:1}}
-    .brand{
-      display:flex; align-items:center; gap:14px; margin-bottom:18px;
-    }
-    .brand img{height:56px; width:auto; filter: drop-shadow(0 4px 14px rgba(0,0,0,.5));}
-    .brand .name{font-weight:800; letter-spacing:0.2px; font-size:1.15rem; color:#fff}
-    h1{font-size:clamp(1.8rem, 2.8vw, 2.4rem); margin:10px 0 12px; line-height:1.15}
-    .accent{
-      background: linear-gradient(135deg,var(--accent4), var(--accent2), var(--accent3));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
+    .brand{display:flex; align-items:center; gap:14px; margin-bottom:18px}
+    .brand img{height:56px; width:auto; filter:drop-shadow(0 4px 14px rgba(0,0,0,.5))}
+    .brand .name{font-weight:800; letter-spacing:.2px; font-size:1.15rem}
+    h1{font-size:clamp(1.8rem,2.8vw,2.4rem); margin:10px 0 12px; line-height:1.15}
+    .accent{background:linear-gradient(135deg,var(--accent4),var(--accent2),var(--accent3)); -webkit-background-clip:text; background-clip:text; color:transparent}
     p{color:var(--muted); margin:0 0 24px; font-size:1.05rem}
-    .cta{
-      display:flex; flex-wrap:wrap; gap:12px; margin-top:6px;
-    }
-    .btn{
-      appearance:none; border:none; cursor:pointer;
-      padding:12px 18px; border-radius:12px; font-weight:600; letter-spacing:.1px;
-      text-decoration:none; display:inline-flex; align-items:center; gap:8px;
-      transition:transform .15s ease, box-shadow .2s ease, opacity .2s ease;
-    }
-    .btn-primary{
-      background: linear-gradient(135deg, var(--accent4), var(--accent2), var(--accent3));
-      color:#0a0a0a; box-shadow: 0 6px 18px rgba(36,87,255,.28);
-    }
-    .btn-outline{
-      background:transparent; color:var(--txt);
-      border:1px solid rgba(255,255,255,0.18);
-    }
-    .btn:hover{transform: translateY(-1px)}
-    .details{
-      display:grid; grid-template-columns: 1fr; gap:10px; margin-top:18px; font-size:.98rem;
-    }
+    .details{display:grid; grid-template-columns:1fr; gap:10px; margin-top:18px; font-size:.98rem}
     .details a{color:var(--txt); opacity:.9; text-decoration:none}
+    .cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:6px}
+    .btn{appearance:none; border:none; cursor:pointer; padding:12px 18px; border-radius:12px; font-weight:600; letter-spacing:.1px;
+      text-decoration:none; display:inline-flex; align-items:center; gap:8px; transition:transform .15s ease, box-shadow .2s ease, opacity .2s ease}
+    .btn-primary{background:linear-gradient(135deg,var(--accent4),var(--accent2),var(--accent3)); color:#0a0a0a; box-shadow:0 6px 18px rgba(36,87,255,.28)}
+    .btn-outline{background:transparent; color:var(--txt); border:1px solid rgba(255,255,255,.18)}
+    .btn:hover{transform:translateY(-1px)}
     .muted{opacity:.6}
     footer{margin-top:24px; font-size:.9rem; color:#9aa0a6}
-    @media(min-width:560px){ .details{ grid-template-columns: repeat(3, max-content); gap:18px } }
+    @media(min-width:560px){.details{grid-template-columns:repeat(3,max-content); gap:18px}}
   </style>
 </head>
 <body>
@@ -103,94 +54,57 @@
         <img src="/assets/img/logo-novastudio.png" alt="NOVA STUDIO logo" />
         <div class="name">NOVA STUDIO</div>
       </div>
+
       <h1><span class="accent">Dziękujemy!</span> Twoja wiadomość jest już u nas.</h1>
       <p>Odpowiemy możliwie najszybciej – zwykle tego samego dnia roboczego. Jeśli temat jest pilny, skorzystaj z kontaktu bezpośredniego:</p>
+
       <div class="details">
         <div>☎️ <a href="tel:+48732777326">+48 732 777 326</a></div>
         <div>✉️ <a href="mailto:novastudio.kontakt@gmail.com">novastudio.kontakt@gmail.com</a></div>
         <div>🌐 <a href="https://nova-studio.info/">Powrót na stronę główną</a></div>
       </div>
+
       <div class="cta">
         <a class="btn btn-primary" href="https://nova-studio.info/">Wróć na stronę</a>
         <a class="btn btn-outline" href="https://www.instagram.com/novastudioig/" target="_blank" rel="noopener">Odwiedź nas na Instagramie</a>
       </div>
+
       <footer class="muted">Twoja Marka. Nasza Strategia.</footer>
     </div>
   </div>
 
-    <!-- AUTO-Lead via CAPI po wejściu na stronę podziękowania -->
+  <!-- Jednorazowy LEAD przez CAPI po wejściu na stronę -->
   <script>
     (function () {
       if (sessionStorage.getItem('lead_sent')) return;
+      sessionStorage.setItem('lead_sent', '1'); // zabezpieczenie przed duplikacją
 
       function getCookie(name) {
-        const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([$?*|{}\(\)\[\]\\\/\+^])/g,'\\$1') + '=([^;]*)'));
-        return m ? decodeURIComponent(m[1]) : null;
+        const m = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([$?*|{}()\\[\\]\\\\/+^])/g,'\\\\$1') + '=([^;]*)'));
+        return m ? decodeURIComponent(m[1]) : '';
       }
-      function getParam(name) {
-        return new URLSearchParams(location.search).get(name);
-      }
+      function getParam(name){ return new URLSearchParams(location.search).get(name); }
 
       const fbp = getCookie('_fbp') || localStorage.getItem('_fbp') || '';
       const fbclid = getParam('fbclid');
-      const fbc = fbclid ? `fb.1.${Date.now()}.${fbclid}` : '';
+      const fbc = fbclid ? `fb.1.${Math.floor(Date.now()/1000)}.${fbclid}` : '';
 
       const payload = {
-        event_name: "Lead",
-        event_time: Math.floor(Date.now() / 1000),
-        event_id: "form_submit_" + Date.now(),
+        event_name: 'Lead',
+        event_time: Math.floor(Date.now()/1000),
+        event_id: 'form_submit_' + Date.now(),
+        action_source: 'website',
         event_source_url: window.location.href,
-        action_source: "website",
-        fbp: fbp,
-        fbc: fbc
+        fbp, fbc,
+        user_data: { client_user_agent: navigator.userAgent }
       };
 
-      fetch("/.netlify/functions/meta-capi", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      fetch('/.netlify/functions/meta-capi', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-      }).then(r => r.json()).then(console.log);
-
-      sessionStorage.setItem('lead_sent', '1');
+      }).then(r => r.text()).catch(()=>{});
     })();
-  ...
-  <footer class="muted">Twoja Marka. Nasza Strategia.</footer>
-</div>
-</div>
-
-<script>
-  // pomocnicze: odczyt ciasteczek
-  function getCookie(name) {
-    const m = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-    return m ? decodeURIComponent(m[2]) : undefined;
-  }
-  function getFbp() { return getCookie('_fbp'); }
-  function getFbc() {
-    const fbcCookie = getCookie('_fbc');
-    if (fbcCookie) return fbcCookie;
-    const fbclid = new URLSearchParams(location.search).get('fbclid');
-    if (fbclid) return `fb.1.${Math.floor(Date.now()/1000)}.${fbclid}`;
-    return undefined;
-  }
-
-  (function sendLead() {
-    const payload = {
-      event_name: 'Lead',
-      event_id: 'lead-' + Date.now(),
-      event_time: Math.floor(Date.now()/1000),
-      action_source: 'website',
-      event_source_url: window.location.href,
-      fbp: getFbp(),
-      fbc: getFbc(),
-      user_data: { client_user_agent: navigator.userAgent }
-    };
-
-    fetch('/.netlify/functions/meta-capi', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(r => r.text()).catch(() => {});
-  })();
-</script>
+  </script>
 </body>
 </html>
