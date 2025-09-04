@@ -1,8 +1,9 @@
 // netlify/functions/lead.js
 
 
-const PIXEL_ID = process.env.FB_PIXEL_ID;
-const ACCESS_TOKEN = process.env.FB_ACCESS_TOKEN;
+const PIXEL_ID = process.env.PIXEL_ID;
+const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+
 
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
