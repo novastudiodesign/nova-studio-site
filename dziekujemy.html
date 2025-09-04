@@ -153,6 +153,44 @@
 
       sessionStorage.setItem('lead_sent', '1');
     })();
-  </script>
+  ...
+  <footer class="muted">Twoja Marka. Nasza Strategia.</footer>
+</div>
+</div>
+
+<script>
+  // pomocnicze: odczyt ciasteczek
+  function getCookie(name) {
+    const m = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    return m ? decodeURIComponent(m[2]) : undefined;
+  }
+  function getFbp() { return getCookie('_fbp'); }
+  function getFbc() {
+    const fbcCookie = getCookie('_fbc');
+    if (fbcCookie) return fbcCookie;
+    const fbclid = new URLSearchParams(location.search).get('fbclid');
+    if (fbclid) return `fb.1.${Math.floor(Date.now()/1000)}.${fbclid}`;
+    return undefined;
+  }
+
+  (function sendLead() {
+    const payload = {
+      event_name: 'Lead',
+      event_id: 'lead-' + Date.now(),
+      event_time: Math.floor(Date.now()/1000),
+      action_source: 'website',
+      event_source_url: window.location.href,
+      fbp: getFbp(),
+      fbc: getFbc(),
+      user_data: { client_user_agent: navigator.userAgent }
+    };
+
+    fetch('/.netlify/functions/meta-capi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(r => r.text()).catch(() => {});
+  })();
+</script>
 </body>
 </html>
