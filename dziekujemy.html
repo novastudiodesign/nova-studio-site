@@ -248,12 +248,16 @@
   try { emailRaw = (localStorage.getItem('lead_email') || '').trim(); localStorage.removeItem('lead_email'); } catch(_){}
   try {
     fetch('/.netlify/functions/lead', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ event_id: eventId, email: emailRaw, fbp: fbp, fbc: fbc })
-    }).catch(function(){});
-  } catch(_){}
-})();
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    event_id: eventId,
+    email: emailRaw,
+    fbp,
+    fbc,
+    test_event_code: "TEST79846"
+  })
+});
 </script>
 </body>
 </html>
