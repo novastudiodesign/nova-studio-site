@@ -35,11 +35,11 @@ exports.handler = async (event) => {
         ph: body.ph  // sha256(phone) w E.164
       }
     };
+const payload = { data: [eventObj] };
 
-    const payload = {
-      data: [eventObj],
-      ...(body.test_event_code ? { test_event_code: body.test_event_code } : {})
-    };
+if (body.test_event_code) {
+  payload.test_event_code = body.test_event_code;
+}
 
     const pixelPath = PIXEL_ID ? `/${PIXEL_ID}` : '';
 const url = `https://graph.facebook.com/v19.0${pixelPath}/events?access_token=${ACCESS_TOKEN}`;
