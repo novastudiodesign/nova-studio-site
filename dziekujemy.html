@@ -226,38 +226,43 @@
     }, true);
   } catch(_){}
 })();
-</script>
-
 <script>
 (function(){
   function uuidv4(){
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c){
-      var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
-      return v.toString(16);
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,function(c){
+      var r=Math.random()*16|0, v=c==='x'?r:(r&0x3|0x8); return v.toString(16);
     });
   }
   var eventId = uuidv4();
-  try { if (typeof fbq === 'function') { fbq('track', 'Lead', {}, { eventID: eventId }); } } catch(_){}
-  function getCookie(name){
-    var m = document.cookie.match('(^|;)\s*' + name + '\s*=\s*([^;]+)');
-    return m ? m.pop() : '';
-  }
+
+  // (opcjonalnie) browser Pixel
+  try { if (typeof fbq === 'function') fbq('track','Lead',{}, {eventID: eventId}); } catch(e){}
+
+  // cookies + email
+  function getCookie(name){ var m=document.cookie.match('(^|;)\\s*'+name+'\\s*=\\s*([^;]+)'); return m?m.pop():''; }
   var fbp = getCookie('_fbp') || '';
   var fbc = getCookie('_fbc') || '';
   var emailRaw = '';
-  try { emailRaw = (localStorage.getItem('lead_email') || '').trim(); localStorage.removeItem('lead_email'); } catch(_){}
-  try {
-    fetch('/.netlify/functions/lead', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    event_id: eventId,
-    email: emailRaw,
-    fbp,
-    fbc,
-    test_event_code: "TEST79846"
+  try { emailRaw = (localStorage.getItem('lead_email')||'').trim(); localStorage.removeItem('lead_email'); } catch(e){}
+
+  // ← WSTAW SWÓJ KOD TESTOWY W CUDZYSŁOWIE lub zostaw "".
+  var TEST_CODE = "TEST79846";
+
+  fetch('/.netlify/functions/lead', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      event_id: eventId,
+      email: emailRaw,
+      fbp: fbp,
+      fbc: fbc,
+      test_event_code: TEST_CODE || undefined
+    })
   })
-});
+  .then(r => r.text())
+  .then(t => console.log('CAPI resp:', t))
+  .catch(() => {});
+})();
 </script>
 </body>
 </html>
