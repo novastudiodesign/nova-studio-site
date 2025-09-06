@@ -1,13 +1,17 @@
 // netlify/functions/lead.js
 
+const fetch = require("node-fetch");
+const crypto = require("crypto");
 
 const PIXEL_ID = process.env.PIXEL_ID || process.env.FB_PIXEL_ID;
 const ACCESS_TOKEN = process.env.ACCESS_TOKEN;
 
-
 exports.handler = async (event) => {
   if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+    return {
+      statusCode: 405,
+      body: "Method Not Allowed"
+    };
   }
 
   try {
@@ -20,30 +24,35 @@ exports.handler = async (event) => {
       "";
     const userAgent = headers["user-agent"] || "";
 
+    if (!body.em && !body.ph) {
+      return {
+        statusCode: 400,
+        body: JSON.stringify({ error: "Brak danych kontaktowych (email lub telefon)" })
+      };
+    }
+
     const eventObj = {
       event_name: body.event_name || "Lead",
       event_time: Math.floor(Date.now() / 1000),
       event_source_url: body.event_source_url || headers["referer"] || "",
       action_source: "website",
-      event_id: body.event_id, // do deduplikacji
+      event_id: body.event_id || crypto.randomUUID(),
       user_data: {
         client_ip_address: clientIp,
         client_user_agent: userAgent,
-        fbp: body.fbp,
-        fbc: body.fbc,
-        em: body.em, // sha256(email) w lowercase
-        ph: body.ph  // sha256(phone) w E.164
+        fbp: body.fbp || undefined,
+        fbc: body.fbc || undefined,
+        em: body.em || undefined, //
+        ph: body.ph || undefined  //
       }
     };
-const payload = { data: [eventObj] };
 
-if (body.test_event_code) {
-  payload.test_event_code = body.test_event_code;
-}
+    const payload = {
+      data: [eventObj],
+      ...(body.test_event_code ? { test_event_code: body.test_event_code } : {})
+    };
 
-    const pixelPath = PIXEL_ID ? `/${PIXEL_ID}` : '';
-const url = `https://graph.facebook.com/v19.0${pixelPath}/events?access_token=${ACCESS_TOKEN}`;
-
+    const url = `https://graph.facebook.com/v19.0/${PIXEL_ID}/events?access_token=${ACCESS_TOKEN}`;
 
     const resp = await fetch(url, {
       method: "POST",
@@ -58,6 +67,9 @@ const url = `https://graph.facebook.com/v19.0${pixelPath}/events?access_token=${
       body: text
     };
   } catch (e) {
-    return { statusCode: 500, body: JSON.stringify({ error: e.message }) };
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: e.message })
+    };
   }
 };
